@@ -92,7 +92,7 @@ async function submitForm(form, formName) {
         method: 'post',
         mode: 'no-cors',
         url: 'https://pffm.azurewebsites.net/form',
-        data: submission
+        data: JSON.stringify(submission)
     })
       .then(() => { return true })
       .catch((err) => {
