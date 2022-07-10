@@ -83,6 +83,7 @@ document.getElementById('submit').addEventListener("click", async (event) => {
 })
 
 async function submitForm(form, formName) {
+    console.log(form, formName)
     const Url = 'https://pffm.azurewebsites.net/form';
     const headers = { headers: { 'Content-Type': 'application/json' } }
     const method = { method: 'POST' }
