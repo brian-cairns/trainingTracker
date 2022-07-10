@@ -94,7 +94,7 @@ async function submitForm(data, form) {
       'Content-Type': 'application/json',
       "Access-Control-Allow-Origin" : "*"
     },
-    body: document
+    body: JSON.stringify(document)
   })
     .then((response) => {
       if (response.status == 200) {
