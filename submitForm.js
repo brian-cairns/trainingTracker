@@ -89,7 +89,7 @@ async function submitForm(form, formName) {
     const submission = {form: formName, data: form} 
     console.log(form, destinationUrl, headers, method, submission)
     fetch({
-        method: 'post',
+        method: 'POST',
         mode: 'no-cors',
         url: 'https://pffm.azurewebsites.net/form',
         data: JSON.stringify(submission)
