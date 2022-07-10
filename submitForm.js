@@ -109,6 +109,6 @@ function showSuccess() {
 }
 
 function showError(err) {
-    console.log(err)
+    console.error
     document.getElementById('returnMessage').innerHTML = `An error occurred when submitting this form, which was ${err}. Please contact the administrator for help.`
 }
