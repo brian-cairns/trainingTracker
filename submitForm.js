@@ -82,24 +82,27 @@ document.getElementById('submit').addEventListener("click", async (event) => {
     submitForm(newForm, 'trainingTracker')
 })
 
-async function submitForm(form, formName) {
-  console.log(form, formName)
-  const Url = 'https://pffm.azurewebsites.net/form';
-  const headers = { headers: { 'Content-Type': 'application/json' } }
-  const method = { method: 'POST' }
-  const submission = {form: formName, data: form} 
-  console.log(form, Url, headers, method, submission)
-  const xml = new XMLHttpRequest();
-  xml.setRequestHeader({ 'Content-Type': 'application/json' })
-  xml.open(Url, 'POST')
-  xml.send(submission)
-  if (xml.request.status === 200) {
-    showSuccess()
-  } else {
-    let error = xml.responseXML
-    showError(error)
+async function submitForm(data, form) {
+  const document = {
+    'form': form,
+    'data': data
   }
+  console.log(document)
+  fetch('https://pffm.azurewebsites.net/form', {
+    method: "POST",
+    headers: { 'Content-Type': 'application/JSON' },
+    body: document
+  })
+    .then((response) => {
+      if (response == 200) {
+      showSuccess()
+      } else {
+        showError(response.body)
+      }
+    })
+    .catch((err) => showError(err))
 }
+
 
 function showSuccess() {
     document.getElementById('returnMessage').innerHTML = 'Form has been successfully submitted'
