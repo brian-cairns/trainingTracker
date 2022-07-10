@@ -1,5 +1,3 @@
-const axios = require('axios')
-
 let submit = document.getElementById('submit')
 console.log(submit)
 const formName = 'trainingTracker'
@@ -90,8 +88,9 @@ async function submitForm(form, formName) {
     const method = { method: 'POST' }
     const submission = {form: formName, data: form} 
     console.log(form, destinationUrl, headers, method, submissionJson)
-    axios({
+    fetch({
         method: 'post',
+        mode: 'no-cors',
         url: 'https://pffm.azurewebsites.net/form',
         data: submission
     })
