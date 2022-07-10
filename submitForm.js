@@ -94,7 +94,7 @@ async function submitForm(data, form) {
     body: document
   })
     .then((response) => {
-      if (response == 200) {
+      if (response.status == 200) {
       showSuccess()
       } else {
         showError(response.body)
