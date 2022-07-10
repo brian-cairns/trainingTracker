@@ -79,27 +79,26 @@ smoothMoves.addEventListener('change', (e) => {
 
 document.getElementById('submit').addEventListener("click", async (event) => {
 		console.log('click')
-    submitForm(newForm, 'TrainingTracker')
+    submitForm(newForm, 'trainingTracker')
 })
 
 async function submitForm(form, formName) {
-    console.log(form, formName)
-    const Url = 'https://pffm.azurewebsites.net/form';
-    const headers = { headers: { 'Content-Type': 'application/json' } }
-    const method = { method: 'POST' }
-    const submission = {form: formName, data: form} 
-    console.log(form, Url, headers, method, submission)
-    fetch(Url, {
-        method: 'POST',
-        mode: 'no-cors',
-        data: JSON.stringify(submission)
-    })
-      .then(() => { return true })
-      .catch((err) => {
-        showError(err)
-        return false
-    })
+  console.log(form, formName)
+  const Url = 'https://pffm.azurewebsites.net/form';
+  const headers = { headers: { 'Content-Type': 'application/json' } }
+  const method = { method: 'POST' }
+  const submission = {form: formName, data: form} 
+  console.log(form, Url, headers, method, submission)
+  const xml = new XMLHttpRequest();
+  xml.setRequestHeader({ 'Content-Type': 'application/json' })
+  xml.open(Url, 'POST')
+  xml.send(submission)
+  if (xml.request.status === 200) {
     showSuccess()
+  } else {
+    let error = xml.responseXML
+    showError(error)
+  }
 }
 
 function showSuccess() {
