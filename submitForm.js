@@ -91,7 +91,10 @@ async function submitForm(data, form) {
   fetch('https://pffm.azurewebsites.net/form', {
     method: "POST",
     mode: 'no cors',
-    headers: { 'Content-Type': 'application/JSON' },
+    headers: {
+      'Content-Type': 'application/JSON',
+      "Access-Control-Allow-Origin" : "*"
+    },
     body: document
   })
     .then((response) => {
