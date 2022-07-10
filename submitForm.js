@@ -87,7 +87,7 @@ async function submitForm(form, formName) {
     const headers = { headers: { 'Content-Type': 'application/json' } }
     const method = { method: 'POST' }
     const submission = {form: formName, data: form} 
-    console.log(form, destinationUrl, headers, method, submissionJson)
+    console.log(form, destinationUrl, headers, method, submission)
     fetch({
         method: 'post',
         mode: 'no-cors',
