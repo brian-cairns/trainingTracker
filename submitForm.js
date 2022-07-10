@@ -83,15 +83,14 @@ document.getElementById('submit').addEventListener("click", async (event) => {
 })
 
 async function submitForm(form, formName) {
-    const destinationUrl = 'https://pffm.azurewebsites.net/form';
+    const Url = 'https://pffm.azurewebsites.net/form';
     const headers = { headers: { 'Content-Type': 'application/json' } }
     const method = { method: 'POST' }
     const submission = {form: formName, data: form} 
     console.log(form, destinationUrl, headers, method, submission)
-    fetch({
+    fetch(Url, {
         method: 'POST',
         mode: 'no-cors',
-        url: 'https://pffm.azurewebsites.net/form',
         data: JSON.stringify(submission)
     })
       .then(() => { return true })
