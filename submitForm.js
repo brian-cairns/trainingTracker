@@ -79,7 +79,7 @@ smoothMoves.addEventListener('change', (e) => {
 
 document.getElementById('submit').addEventListener("click", async (event) => {
 		console.log('click')
-    submitForm(newForm, 'trainingTracker')
+    submitForm(newForm, formName)
 })
 
 async function submitForm(data, form) {
