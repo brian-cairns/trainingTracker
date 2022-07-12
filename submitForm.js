@@ -1,6 +1,6 @@
 let submit = document.getElementById('submit')
 console.log(submit)
-const formName = 'consultationFeeSummary'
+const formName = 'trainingTracker'
 console.log('form: ' + formName)
 let newForm = {}
 
@@ -11,47 +11,75 @@ clientId.addEventListener('change', (e) => {
   console.log(newForm.clientId);
   })
   
-let employeeName = document.querySelector('input#employeeName')
-employeeName.addEventListener('change', (e) => {
-	newForm.employeeName = e.target.value;
-  console.log(newForm.employeeName);
+let date = document.querySelector('input#date')
+date.addEventListener('change', (e) => {
+	newForm.date = e.target.value;
+  console.log(newForm.date);
   })
-class ServiceItem {
-  constructor(date, serviceSummary, minutes, serviceDetails) {
-    this.date = date;
-    this.serviceSummary = serviceSummary;
-    this.minutes = minutes;
-    this.serviceDetails = serviceDetails
-  }
-}
+  
+let behaviors = document.getElementById('behaviors')
+behaviors.addEventListener('change', (e) => {
+	newForm.behaviors = e.target.value;
+  console.log(newForm.behaviors);
+  })
+  
+let sensory = document.getElementById('sensoryActivity')
+sensory.addEventListener('change', (e) => {
+	newForm.sensory = e.target.value;
+  console.log(newForm.sensory);
+  })
+  
+let movement = document.getElementById('movement')
+movement.addEventListener('change', (e) => {
+	newForm.movement = e.target.value;
+  console.log(newForm.movement);
+  })
 
-async function getServiceItems() {
-  let items = []
-  for (let i = 1; i < 4; i++) {
-    if (document.getElementById(`month${i}`).value == 0) {
-      i = 4
-      return items
-    } else {
-      let item = new ServiceItem;
-      let month = document.getElementById(`month${i}`).value;
-      let day = document.getElementById(`day${i}`).value;
-      let year = document.getElementById(`year${i}`).value;
-      let hours = document.getElementById(`hours${i}`).value;
-      let minutes = document.getElementById(`minutes${i}`).value;
-      item.serviceSummary = document.getElementById(`serviceSummary${i}`).value;
-      item.serviceDetails = document.getElementById(`serviceDetails${i}`).value;
-      item.date = `${year}-${day}-${month}`
-      item.minutes = hours * 60 + minutes;
-      items.push(item)
-    }
-  }
-  return items
-}
+let learning = document.getElementById('learning')
+learning.addEventListener('change', (e) => {
+	newForm.learning = e.target.value;
+  console.log(newForm.learning);
+  })
+
+let dataCollection = document.getElementById('dataCollection')
+dataCollection.addEventListener('change', (e) => {
+	newForm.dataCollection = e.target.value;
+  console.log(newForm.dataCollection);
+  })
+
+let client = document.getElementById('client')
+client.addEventListener('change', (e) => {
+	newForm.client = e.target.value;
+  console.log(newForm.client);
+  })
+
+let thingsNeeds = document.getElementById('thingsNeeds')
+thingsNeeds.addEventListener('change', (e) => {
+	newForm.thingsNeeds = e.target.value;
+  console.log(newForm.thingsNeeds);
+  })
+  
+let followUp = document.getElementById('followUp')
+followUp.addEventListener('change', (e) => {
+	newForm.followUp = e.target.value;
+  console.log(newForm.followUp);
+  })
+
+let notes = document.getElementById('notes')
+notes.addEventListener('change', (e) => {
+	newForm.notes = e.target.value;
+  console.log(newForm.notes);
+  })
+
+let smoothMoves = document.getElementById('smoothMoves')
+smoothMoves.addEventListener('change', (e) => {
+	newForm.smoothMoves = e.target.value;
+  console.log(newForm.smoothMoves);
+  })
 
 document.getElementById('submit').addEventListener("click", async (event) => {
-  const serviceItems = await getServiceItems()
-  newForm.serviceItems = serviceItems
-  submitForm(newForm, 'consultationFeeSummary')
+		console.log('click')
+    submitForm(newForm, 'trainingTracker')
 })
 
 async function submitForm(data, form) {
