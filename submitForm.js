@@ -100,7 +100,7 @@ async function submitForm(data, form) {
       if (response.status == 200) {
       showSuccess()
       } else {
-        showError(response.body)
+        showError()
       }
     })
     .catch((err) => showError(err))
