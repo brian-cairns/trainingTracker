@@ -4,6 +4,7 @@ const formName = 'trainingTracker'
 console.log('form: ' + formName)
 let newForm = {}
 
+
 let clientId = document.querySelector('input#clientName')
 clientId.addEventListener('change', (e) => {
 	console.log('changed')
@@ -78,8 +79,9 @@ smoothMoves.addEventListener('change', (e) => {
   })
 
 document.getElementById('submit').addEventListener("click", async (event) => {
-		console.log('click')
-    submitForm(newForm, formName)
+  console.log('click')
+  submitForm(newForm, formName)
+  document.getElementById('returnMessage').innerHTML = 'Please wait while the form is saved'
 })
 
 async function submitForm(data, form) {
@@ -96,33 +98,25 @@ async function submitForm(data, form) {
     },
     body: JSON.stringify(document)
   })
-        .then(response => response.json())
-    .then(data => respond(data)) 
+    .then((response) => {
+      if (response.status == 200) {
+      showSuccess()
+      } else {
+        showError(response.body)
+      }
+    })
     .catch((err) => showError(err))
 }
 
-function respond(data) {
-  let formId = data.formId
-  if (formId) {
-    showSuccess(formId)
-    let name = newForm.clientId	  
-    sendNotification(formId, name)	  
-  } else {
-    showError(data.error)
-  }
-}
 
-function showSuccess(formId) {
-  document.getElementById('returnMessage').innerHTML = 'Form has been successfully submitted'
-  printForm.style.display = 'block';
-  printForm.addEventListener('click', (e) => {
-    location.href = `phoenix-freedom-foundation-backend.webflow.io/completed-forms/training-tracker?formId=${formId}`
-  })
+function showSuccess() {
+    document.getElementById('returnMessage').innerHTML = 'Form has been successfully submitted'
 }
 
 function showError(err) {
     console.error
     document.getElementById('returnMessage').innerHTML = `An error occurred when submitting this form, which was ${err}. Please contact the administrator for help.`
+    document.getElementById('return').style.display = 'inline'
 }
 
 async function sendNotification(id, client) {
@@ -131,7 +125,10 @@ async function sendNotification(id, client) {
   const url = 'https://pffm.azurewebsites.net/notices'
   let notification = {
     'name': client,
-    'notice' : message 
+    'notice': message,
+    'level': client,
+    'priority': 'not urgent'
+    
   }
   const header = {
       'Content-Type': 'application/json',
@@ -146,4 +143,3 @@ async function sendNotification(id, client) {
     .then(() => console.log('notice sent'))
     .catch(console.error)
 }
- 
